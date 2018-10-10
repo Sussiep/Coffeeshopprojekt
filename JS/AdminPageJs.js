@@ -1,4 +1,9 @@
-// In my case, I need to fetch these data before custom actions
+
+function openWin() {
+    window.open("http://localhost:63342/Coffeeshopprojekt/admin.html?_ijt=ho8mlojqr28j5etokotlgs21fi");
+}
+
+
 
 $('#coffeeForm').on('submit',function(e){
     e.preventDefault();
