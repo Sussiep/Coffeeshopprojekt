@@ -55,7 +55,7 @@ function getCoffeeById() {
                 "                      <div id=\"Sweety-coffee\"><p>"+coffee.coffeeName+"</p>" +
                 "                       <div id=\"edit\">\n" +
                 "                            <input type=\"button\" value=\"&#xf044\" class=\"fas fa-edit\" onclick=\"()\"> \n" +
-                "                            <input type=\"button\" value=\"&#xf2ed\" class=\"fas fa-trash-alt\" onclick=\"()\"></p>\n" +
+                "                            <input type=\"button\" value=\"&#xf2ed\" class=\"fas fa-trash-alt\" onclick='deleteCoffee("+coffee.id+")'\> \n" +
                 "                        </div></div>\n" +
                 "                      <div id=\"flavour\"><p>Strength: "+coffee.coffeeStrength+"</p>\n" +
                 "                        <div id=\"\"><p>Price: "+coffee.coffeePrice+"</p></div>\n" +
@@ -99,6 +99,24 @@ $('#coffeeForm').on('submit',function(e){
     });
 });
 
+function deleteCoffee(id) {
+    // Call Web API to get a list of post
+    console.log("blabalba");
+    $.ajax({
+        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee/'+id,
+        type: 'DELETE',
+        dataType: 'json',
+        processData: false,
+        success: function (message) {
+            console.log("slettet!");
+        },
+        error: function (request, message, error) {
+            console.log("fejl");
+        }
+    });
+}
+
+
 function openWin() {
     window.open("../Coffeeshopprojekt/admin.html");
 }
@@ -106,3 +124,4 @@ function openWin() {
 function test(id) {
     window.open("../Coffeeshopprojekt/productinfo.html?id="+id);
 }
+
