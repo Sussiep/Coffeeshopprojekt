@@ -63,8 +63,8 @@ $('#coffeeForm').on('submit',function(e){
 });
 
 function openWin() {
-    window.open("http://localhost:63342/Coffeeshopprojekt/admin.html?_ijt=ho8mlojqr28j5etokotlgs21fi");
-}
+    window.open("../Coffeeshopprojekt/admin.html?_ijt=ho8mlojqr28j5etokotlgs21fi"); // relative path, var static før
+
 
 function test() {
     window.open("");
