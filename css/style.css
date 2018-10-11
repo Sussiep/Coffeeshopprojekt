@@ -146,11 +146,11 @@ justify-items: center;
     font-size: 40px;
 }
 
+   
 #edit{
-    font-size: 80px;
+    font-size: 40px;
     position: absolute;
-    top: 130px;
+    top:130px;
     right: 150px;
-
 
 }
