@@ -44,6 +44,8 @@ $('#coffeeForm').on('submit',function(e){
     var coffeePrice = $( "#coffeePrice" ).val();
     var coffeeStrength = $( "#coffeeStrength" ).val();
     var coffeeDescription = $( "#coffeeDescription" ).val();
+    var coffeePicUrl = $( "#coffeePicUrl" ).val();
+
     $.ajax({
         url: "https://coffeeshopproject.azurewebsites.net/api/coffee",
         type: 'POST',
@@ -51,7 +53,10 @@ $('#coffeeForm').on('submit',function(e){
             "CoffeeName": coffeeName,
             "CoffeePrice": coffeePrice,
             "CoffeeStrength": coffeeStrength,
-            "CoffeeDescription": coffeeDescription}),
+            "CoffeeDescription": coffeeDescription,
+            "CoffeePicUrl": coffeePicUrl}),
+
+
         processData: false,
         contentType: 'application/json',
         success: function (comments) {
@@ -68,5 +73,5 @@ function openWin() {
 }
 
 function test() {
-    window.open(".../Coffeeshopprojekt/productinfo.html");
+    window.open("../Coffeeshopprojekt/productinfo.html");
 }
