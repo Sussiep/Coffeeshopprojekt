@@ -145,3 +145,12 @@ justify-items: center;
     margin: 20px auto;
     font-size: 40px;
 }
+
+#edit{
+    font-size: 80px;
+    position: absolute;
+    top: 130px;
+    right: 150px;
+
+
+}
