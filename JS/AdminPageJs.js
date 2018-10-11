@@ -14,7 +14,7 @@ function listCoffees() {
 }
 
 function onGetCoffeeSuccess(coffees) {
-    $("#products_area").empty();
+    $("#products_area").empty() && $("#products_area1").empty();
     // Iterate over the collection of data
     $.each(coffees, function (index, coffee) {
         // Add a row to the post table
@@ -23,9 +23,10 @@ function onGetCoffeeSuccess(coffees) {
 }
 
 function addCoffeeRow(coffee) {
-    // Check if <tbody> tag exists, add one if not
     // Append row to <table>
     $("#products_area").append(
+        buildCoffeeRow(coffee));
+    $("#products_area1").append(
         buildCoffeeRow(coffee));
 }
 
@@ -63,9 +64,9 @@ $('#coffeeForm').on('submit',function(e){
 });
 
 function openWin() {
-    window.open("../Coffeeshopprojekt/admin.html?_ijt=ho8mlojqr28j5etokotlgs21fi"); // relative path, var static før
-
+    window.open("../Coffeeshopprojekt/admin.html");
+}
 
 function test() {
-    window.open("");
+    window.open(".../Coffeeshopprojekt/productinfo.html");
 }
