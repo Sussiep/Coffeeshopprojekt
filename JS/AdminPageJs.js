@@ -1,7 +1,10 @@
-function listCoffees() {
+let page;
+page = 1;
+
+function listCoffees(page) {
     // Call Web API to get a list of post
     $.ajax({
-        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage=1&ItemsPerPage=6',
+        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage='+ page +'&ItemsPerPage=6',
         type: 'GET',
         dataType: 'json',
         success: function (coffees) {
@@ -26,7 +29,7 @@ function onGetCoffeeSuccess(coffees) {
 function addCoffeeRow(coffee) {
     // Append row to <table>
     $("#products_area").append(
-        buildCoffeeRow(coffee));
+        buildCoffeeRow(coffee))
 }
 
 function buildCoffeeRow(coffee) {
@@ -173,4 +176,11 @@ function test(id) {
 function editCoffee(id) {
     window.open("../Coffeeshopprojekt/EditWin.html?id="+id);
 }
-
+$('#btnPrev').on('click',function(e) {
+    e.preventDefault();
+    listCoffees(--page);
+});
+$('#btnNext').on('click',function(e) {
+    e.preventDefault();
+    listCoffees(++page);
+});
