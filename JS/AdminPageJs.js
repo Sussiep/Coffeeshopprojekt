@@ -1,7 +1,7 @@
 function listCoffees() {
     // Call Web API to get a list of post
     $.ajax({
-        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage=1&ItemsPerPage=6',
+        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage=1&ItemsPerPage=3',
         type: 'GET',
         dataType: 'json',
         success: function (coffees) {
@@ -13,11 +13,8 @@ function listCoffees() {
     });
 }
 
-function onGetCoffeeSuccess(coffee) {
-    if ($("#coffeesTable tbody").length == 0) {
-        $("#coffeesTable").append("<tbody></tbody>");
-    }
-    $("#coffeesTable tbody").empty();
+function onGetCoffeeSuccess(coffees) {
+    $("#products_area").empty();
     // Iterate over the collection of data
     $.each(coffees, function (index, coffee) {
         // Add a row to the post table
@@ -28,33 +25,15 @@ function onGetCoffeeSuccess(coffee) {
 function addCoffeeRow(coffee) {
     // Check if <tbody> tag exists, add one if not
     // Append row to <table>
-    $("#coffeeTable tbody").append(
+    $("#products_area").append(
         buildCoffeeRow(coffee));
 }
 
 function buildCoffeeRow(coffee) {
-    var ret =
-        "<tr>" +
-        "<td>" + coffee.CoffeeId + "</td>" +
-        "<td>" + coffee.CoffeeName + "</td>" +
-        "<td>" + coffee.CoffeePrice + "</td>" +
-        "<td>" + coffee.CoffeeStrength + "</td>" +
-        "<td>" + coffee.CoffeeDescription + "</td>" +
-        "<td>" +
-        "<button type='button' " +
-        "class='btn btn-info' " +
-        "data-id='" + customer.id + "'>" +
-        "<i class='fas fa-info-circle'></i>" +
-        "</button>" +
-        "</td >" +
-        "<td>" +
-        "<button type='button' " +
-        "class='btn btn-danger' " +
-        "data-id='" + coffee.CoffeeId + "'>" +
-        "<i class='fas fa-minus-circle'></i>" +
-        "</button>" +
-        "</td >" +
-        "</tr>";
+    var ret ="<div id='"+coffee.coffeeId+"' onclick='test()' class=\"mdl-cell mdl-cell--4-col\">\n" +
+        "                       <img id=\"cappuccino\" src=\"img/Cappuccino.jpg\" alt=\"\">\n" +
+        "                       <p>"+coffee.coffeeName+"</p>\n" +
+        "                        </div>";
     return ret;
 }
 
@@ -85,4 +64,8 @@ $('#coffeeForm').on('submit',function(e){
 
 function openWin() {
     window.open("http://localhost:63342/Coffeeshopprojekt/admin.html?_ijt=ho8mlojqr28j5etokotlgs21fi");
+}
+
+function test() {
+    window.open("");
 }
