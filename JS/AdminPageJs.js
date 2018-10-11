@@ -1,7 +1,7 @@
 function listCoffees() {
     // Call Web API to get a list of post
     $.ajax({
-        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage=1&ItemsPerPage=3',
+        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee?CurrentPage=1&ItemsPerPage=6',
         type: 'GET',
         dataType: 'json',
         success: function (coffees) {
@@ -14,6 +14,7 @@ function listCoffees() {
 }
 
 function onGetCoffeeSuccess(coffees) {
+
     $("#products_area").empty() && $("#products_area1").empty();
     // Iterate over the collection of data
     $.each(coffees, function (index, coffee) {
@@ -26,8 +27,6 @@ function addCoffeeRow(coffee) {
     // Append row to <table>
     $("#products_area").append(
         buildCoffeeRow(coffee));
-    $("#products_area1").append(
-        buildCoffeeRow(coffee));
 }
 
 function buildCoffeeRow(coffee) {
@@ -35,6 +34,7 @@ function buildCoffeeRow(coffee) {
         "                       <img id=\"cappuccino\" src=\"img/Cappuccino.jpg\" alt=\"\">\n" +
         "                       <p>"+coffee.coffeeName+"</p>\n" +
         "                        </div>";
+
     return ret;
 }
 
