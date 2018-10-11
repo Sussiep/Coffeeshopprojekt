@@ -30,12 +30,43 @@ function addCoffeeRow(coffee) {
 }
 
 function buildCoffeeRow(coffee) {
-    var ret ="<div id='"+coffee.coffeeId+"' onclick='test()' class=\"mdl-cell mdl-cell--4-col\">\n" +
+    var ret ="<div id='"+coffee.id+"' onclick='test("+coffee.id+")' class=\"mdl-cell mdl-cell--4-col\">\n" +
         "                       <img id=\"cappuccino\" src=\"img/Cappuccino.jpg\" alt=\"\">\n" +
         "                       <p>"+coffee.coffeeName+"</p>\n" +
         "                        </div>";
 
     return ret;
+}
+
+function getCoffeeById() {
+    // get by ID
+    $.ajax({
+        url: 'https://coffeeshopproject.azurewebsites.net/api/coffee/'+ document.URL.split('=')[1],
+        type: 'GET',
+        dataType: 'json',
+        success: function (coffee) {
+            console.log(coffee);
+            $("#coffeeSingle").empty();
+            $("#coffeeSingle").append("<div class=\"mdl-grid\">\n" +
+                "                        <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+                "                         <img id=\"colored\" src=\"img/colored.jpg\" alt=\"\">\n" +
+                "                        </div>\n" +
+                "                        <div class=\"mdl-cell mdl-cell--4-col\">\n" +
+                "                      <div id=\"Sweety-coffee\"><p>"+coffee.coffeeName+"</p>" +
+                "                       <div id=\"edit\">\n" +
+                "                            <input type=\"button\" value=\"&#xf044\" class=\"fas fa-edit\" onclick=\"()\"> \n" +
+                "                            <input type=\"button\" value=\"&#xf2ed\" class=\"fas fa-trash-alt\" onclick=\"()\"></p>\n" +
+                "                        </div></div>\n" +
+                "                      <div id=\"flavour\"><p>Strength: "+coffee.coffeeStrength+"</p>\n" +
+                "                        <div id=\"\"><p>Price: "+coffee.coffeePrice+"</p></div>\n" +
+                "                      <div id=\"Order-here\"><p>Description: <br>"+coffee.coffeeDescription+"</p></div>\n" +
+                "                        </div>\n" +
+                "                      </div>");
+        },
+        error: function (request, message, error) {
+            console.log(error);
+        }
+    });
 }
 
 $('#coffeeForm').on('submit',function(e){
@@ -72,6 +103,6 @@ function openWin() {
     window.open("../Coffeeshopprojekt/admin.html");
 }
 
-function test() {
-    window.open("../Coffeeshopprojekt/productinfo.html");
+function test(id) {
+    window.open("../Coffeeshopprojekt/productinfo.html?id="+id);
 }
