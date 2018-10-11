@@ -54,7 +54,7 @@ function getCoffeeById() {
                 "                        <div class=\"mdl-cell mdl-cell--4-col\">\n" +
                 "                      <div id=\"Sweety-coffee\"><p>"+coffee.coffeeName+"</p>" +
                 "                       <div id=\"edit\">\n" +
-                "                            <input type=\"button\" value=\"&#xf044\" class=\"fas fa-edit\" onclick=\"()\"> \n" +
+                "                            <input type=\"button\" value=\"&#xf044\" class=\"fas fa-edit\" onclick='editCoffee("+coffee.id+")'\> \n" +
                 "                            <input type=\"button\" value=\"&#xf2ed\" class=\"fas fa-trash-alt\" onclick='deleteCoffee("+coffee.id+")'\> \n" +
                 "                        </div></div>\n" +
                 "                      <div id=\"flavour\"><p>Strength: "+coffee.coffeeStrength+"</p>\n" +
@@ -76,6 +76,7 @@ $('#coffeeForm').on('submit',function(e){
     var coffeeStrength = $( "#coffeeStrength" ).val();
     var coffeeDescription = $( "#coffeeDescription" ).val();
     var coffeePicUrl = $( "#coffeePicUrl" ).val();
+
 
     $.ajax({
         url: "https://coffeeshopproject.azurewebsites.net/api/coffee",
@@ -115,7 +116,52 @@ function deleteCoffee(id) {
         }
     });
 }
+$('#editCoffeeForm').on('submit',function(e){
+    e.preventDefault();
+    var id = getUrlParameter('id');
+    var coffeeName = $( "#coffeeName" ).val();
+    var coffeePrice = $( "#coffeePrice" ).val();
+    var coffeeStrength = $( "#coffeeStrength" ).val();
+    var coffeeDescription = $( "#coffeeDescription" ).val();
+    var coffeePicUrl = $( "#coffeePicUrl" ).val();
 
+
+    $.ajax({
+        url: "https://coffeeshopproject.azurewebsites.net/api/coffee/" + getUrlParameter('id'),
+        type: 'PUT',
+        data: JSON.stringify({
+            "id": id,
+            "CoffeeName": coffeeName,
+            "CoffeePrice": coffeePrice,
+            "CoffeeStrength": coffeeStrength,
+            "CoffeeDescription": coffeeDescription,
+            "CoffeePicUrl": coffeePicUrl}),
+
+
+        processData: false,
+        contentType: 'application/json',
+        success: function (comments) {
+            console.log("Modtaget!");
+        },
+        error: function (request, message, error) {
+            console.log(message);;
+        }
+    });
+});
+function getUrlParameter(sParam) {
+    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
 
 function openWin() {
     window.open("../Coffeeshopprojekt/admin.html");
@@ -123,5 +169,8 @@ function openWin() {
 
 function test(id) {
     window.open("../Coffeeshopprojekt/productinfo.html?id="+id);
+}
+function editCoffee(id) {
+    window.open("../Coffeeshopprojekt/EditWin.html?id="+id);
 }
 
